@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+
+    <item
+        android:id="@+id/gotoHome"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/gotoParking"
+        android:title="Find Parking" />
+
+    <item
+        android:id="@+id/gotoPayments"
+        android:title="Payments" />
+
+    <item
+        android:id="@+id/gotoHistory"
+        android:title="History" />
+
+</menu>
