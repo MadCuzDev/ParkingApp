@@ -8,6 +8,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DB_NAME = "parking_r_us", TABLE_NAME = "parking";
     private static final int DB_VERSION = 1;
@@ -41,48 +43,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    /*
-    public String getResults(boolean pastMinute) {
+    public ArrayList<String> getHistory() {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String win;
-        String loss;
-        String tie;
+        ArrayList<String> history = new ArrayList<>();
 
         Cursor cursor;
-        if (!pastMinute) {
 
-            cursor = db.rawQuery("SELECT COUNT(*) FROM stats WHERE result = ?", new String[]{"win"});
-            cursor.moveToFirst();
-            win = cursor.getString(0);
-
-            cursor = db.rawQuery("SELECT COUNT(*) FROM stats WHERE result = ?", new String[]{"loss"});
-            cursor.moveToFirst();
-            loss = cursor.getString(0);
-
-            cursor = db.rawQuery("SELECT COUNT(*) FROM stats WHERE result = ?", new String[]{"tie"});
-
-        } else {
-            cursor = db.rawQuery("SELECT COUNT(*) FROM stats WHERE result = ? AND timestamp >= ?",
-                    new String[]{"win", Integer.toString(Math.round(System.currentTimeMillis() / 1000f) - 60)});
-            cursor.moveToFirst();
-            win = cursor.getString(0);
-
-            cursor = db.rawQuery("SELECT COUNT(*) FROM stats WHERE result = ? AND timestamp >= ?",
-                    new String[]{"loss", Integer.toString(Math.round(System.currentTimeMillis() / 1000f)  - 60)});
-            cursor.moveToFirst();
-            loss = cursor.getString(0);
-
-            cursor = db.rawQuery("SELECT COUNT(*) FROM stats WHERE result = ? AND timestamp >= ?",
-                    new String[]{"tie", Integer.toString(Math.round(System.currentTimeMillis() / 1000f)  - 60)});
-
-        }
+        cursor = db.rawQuery("SELECT location, date, duration, plate FROM " + TABLE_NAME, null);
         cursor.moveToFirst();
-        tie = cursor.getString(0);
+        history.add(cursor.getString(0) + "\n" +  cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3) + "\n\n");
+        while (!cursor.isLast()) {
+            cursor.moveToNext();
+            history.add(cursor.getString(0) + "\n" +  cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3) + "\n\n");
+        }
+
+        history.add(cursor.getString(0) + "\n" +  cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3) + "\n\n");
+
+
         cursor.close();
-        return win + "-" + loss + "-" + tie;
+        return history;
     }
-    */
 
     public void resetDatabase() {
         SQLiteDatabase db = this.getWritableDatabase();

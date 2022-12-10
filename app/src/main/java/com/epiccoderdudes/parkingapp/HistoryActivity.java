@@ -7,6 +7,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -15,6 +16,10 @@ public class HistoryActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     public NavigationView navigationView;
+
+    private TextView historyOutput;
+
+    DatabaseHandler databaseHandler = new DatabaseHandler(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,16 @@ public class HistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setupDrawerContent(navigationView);
+
+        historyOutput = findViewById(R.id.historyOutput);
+
+        StringBuilder outputText = new StringBuilder();
+
+        for (String str : databaseHandler.getHistory()) {
+            outputText.append(str).append("\n");
+        }
+
+        historyOutput.setText(outputText.toString());
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
