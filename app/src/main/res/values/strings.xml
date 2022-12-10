@@ -15,4 +15,5 @@
 
     <string name="find_parking">Find Parking</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="find_parking_button">Choose Spot!</string>
 </resources>

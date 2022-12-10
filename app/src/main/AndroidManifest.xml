@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="ExtraText">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
+        android:maxSdkVersion="32" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

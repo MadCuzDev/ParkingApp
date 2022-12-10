@@ -42,9 +42,9 @@ public class MapsFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             GoogleMap mMap = googleMap;
             
-            LatLng sydney = new LatLng(-34, 151);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            LatLng waterloo = new LatLng(43.5, -80.5);
+            mMap.addMarker(new MarkerOptions().position(waterloo).title("Marker in waterloo"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(waterloo));
         }
     };
 
